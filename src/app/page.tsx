@@ -10,7 +10,6 @@ import FAQSection from "@/components/sections/FAQSection";
 import dynamic from "next/dynamic";
 
 const CartDrawer = dynamic(() => import("@/components/layout/CartDrawer"), { ssr: false });
-const SearchOverlay = dynamic(() => import("@/components/layout/SearchOverlay"), { ssr: false });
 import Footer from "@/components/layout/Footer";
 
 export default function Home() {

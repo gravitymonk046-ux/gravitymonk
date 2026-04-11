@@ -4,11 +4,9 @@ import { SlidersHorizontal } from "lucide-react";
 import ProductCard from "@/components/product/ProductCard";
 import { products, categories } from "@/lib/products";
 
-interface ProductGridProps {
-  searchQuery?: string;
-}
 
-const ProductGrid = ({ searchQuery = "" }: ProductGridProps) => {
+
+const ProductGrid = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [sortBy, setSortBy] = useState("default");
 
@@ -17,19 +15,13 @@ const ProductGrid = ({ searchQuery = "" }: ProductGridProps) => {
     if (activeCategory !== "All") {
       result = result.filter((p) => p.category === activeCategory);
     }
-    if (searchQuery) {
-      const q = searchQuery.toLowerCase();
-      result = result.filter(
-        (p) => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q) || p.description.toLowerCase().includes(q)
-      );
-    }
     switch (sortBy) {
       case "price-low": return [...result].sort((a, b) => a.price - b.price);
       case "price-high": return [...result].sort((a, b) => b.price - a.price);
       case "rating": return [...result].sort((a, b) => b.rating - a.rating);
       default: return result;
     }
-  }, [activeCategory, searchQuery, sortBy]);
+  }, [activeCategory, sortBy]);
 
   return (
     <section id="shop" className="py-20 md:py-32">
