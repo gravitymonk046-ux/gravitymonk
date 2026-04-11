@@ -73,18 +73,7 @@ const ProductCard = ({ product, index }: ProductCardProps) => {
         </Link>
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-300" />
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileHover={{ opacity: 1, y: 0 }}
-          className="absolute bottom-4 left-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-auto"
-        >
-          <button onClick={handleAddToCart} className="btn-primary flex-1 flex items-center justify-center gap-2 py-3 text-[10px] sm:text-xs">
-            Add to Cart
-          </button>
-          <button onClick={handleBuyNow} className="bg-foreground text-background flex-1 flex items-center justify-center gap-2 py-3 text-[10px] sm:text-xs hover:bg-foreground/90 transition-colors">
-            Buy Now
-          </button>
-        </motion.div>
+
 
         <div className="absolute top-4 right-4 flex flex-col gap-2 pointer-events-auto">
           <button
@@ -121,11 +110,26 @@ const ProductCard = ({ product, index }: ProductCardProps) => {
         <p className="text-sm text-muted-foreground mb-1">{product.subtitle}</p>
         <p className="text-xs text-muted-foreground mb-3 line-clamp-2">{product.description}</p>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 mb-6">
           <span className="font-display text-xl font-semibold text-foreground">₹{product.price}</span>
           {product.originalPrice && (
             <span className="text-sm text-muted-foreground line-through">₹{product.originalPrice}</span>
           )}
+        </div>
+
+        <div className="flex gap-2">
+          <button
+            onClick={handleAddToCart}
+            className="btn-primary flex-1 flex items-center justify-center gap-2 py-3 text-[10px] sm:text-xs hover:scale-[1.02] active:scale-[0.98] transition-all"
+          >
+            Add to Cart
+          </button>
+          <button
+            onClick={handleBuyNow}
+            className="bg-foreground text-background flex-1 flex items-center justify-center gap-2 py-3 text-[10px] sm:text-xs hover:bg-foreground/90 hover:scale-[1.02] active:scale-[0.98] transition-all"
+          >
+            Buy Now
+          </button>
         </div>
       </div>
       <CheckoutDialog open={isCheckoutOpen} onOpenChange={setIsCheckoutOpen} />
