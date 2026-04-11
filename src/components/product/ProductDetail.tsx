@@ -1,26 +1,56 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Minus, Plus, Share2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, Minus, Plus, Share2, ShoppingBag, Heart } from "lucide-react";
 import { Product } from "@/lib/products";
 import { addToCart } from "@/lib/cart";
 import { toast } from "sonner";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import ProductCard from "./ProductCard";
 import CheckoutDialog from "./CheckoutDialog";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function ProductDetail({ product, similarProducts }: { product: Product; similarProducts: Product[] }) {
     const [activeImageIndex, setActiveImageIndex] = useState(0);
     const [quantity, setQuantity] = useState(1);
     const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+    const [direction, setDirection] = useState(0);
 
     const images = product.images?.length ? product.images : [product.image];
+
+    const slideVariants = {
+        enter: (direction: number) => ({
+            x: direction > 0 ? 300 : -300,
+            opacity: 0
+        }),
+        center: {
+            zIndex: 1,
+            x: 0,
+            opacity: 1
+        },
+        exit: (direction: number) => ({
+            zIndex: 0,
+            x: direction < 0 ? 300 : -300,
+            opacity: 0
+        })
+    };
+
+    const paginate = (newDirection: number) => {
+        setDirection(newDirection);
+        if (newDirection > 0) {
+            setActiveImageIndex(prev => (prev + 1) % images.length);
+        } else {
+            setActiveImageIndex(prev => (prev - 1 + images.length) % images.length);
+        }
+    };
 
     const handleAddToCart = () => {
         for (let i = 0; i < quantity; i++) {
             addToCart(product);
         }
-        toast.success(`${quantity} ${product.name} added to cart`);
+        toast.success(`${quantity} ${product.name} added to cart`, {
+            icon: <ShoppingBag className="w-4 h-4 text-primary" />,
+        });
     };
 
     const handleBuyNow = () => {
@@ -60,7 +90,10 @@ export default function ProductDetail({ product, similarProducts }: { product: P
                         {images.map((img, idx) => (
                             <button
                                 key={idx}
-                                onClick={() => setActiveImageIndex(idx)}
+                                onClick={() => {
+                                    setDirection(idx > activeImageIndex ? 1 : -1);
+                                    setActiveImageIndex(idx);
+                                }}
                                 className={`w-20 h-24 shrink-0 flex items-center justify-center relative overflow-hidden transition-all ${idx === activeImageIndex ? 'border-2 border-foreground opacity-100' : 'border border-transparent opacity-60 hover:opacity-100'}`}
                             >
                                 <div className="absolute inset-0 bg-[#e5decd]" />
@@ -72,23 +105,47 @@ export default function ProductDetail({ product, similarProducts }: { product: P
                     {/* Main Image View */}
                     <div className="relative w-full aspect-square md:aspect-auto md:h-full bg-[#f1efe9] flex items-center justify-center overflow-hidden flex-1 group">
                         <div className="absolute inset-0 bg-[#ebe5d6]" />
-                        <img
-                            src={images[activeImageIndex]}
-                            alt={product.name}
-                            className="w-full h-full object-cover mix-blend-multiply transition-opacity duration-300 relative z-10"
-                        />
+
+                        <AnimatePresence initial={false} custom={direction} mode="popLayout">
+                            <motion.img
+                                key={activeImageIndex}
+                                src={images[activeImageIndex]}
+                                custom={direction}
+                                variants={slideVariants}
+                                initial="enter"
+                                animate="center"
+                                exit="exit"
+                                transition={{
+                                    x: { type: "spring", stiffness: 300, damping: 30 },
+                                    opacity: { duration: 0.2 }
+                                }}
+                                drag="x"
+                                dragConstraints={{ left: 0, right: 0 }}
+                                dragElastic={1}
+                                onDragEnd={(e, { offset, velocity }) => {
+                                    const swipeThreshold = 50;
+                                    if (offset.x < -swipeThreshold) {
+                                        paginate(1);
+                                    } else if (offset.x > swipeThreshold) {
+                                        paginate(-1);
+                                    }
+                                }}
+                                alt={product.name}
+                                className="w-full h-full object-cover mix-blend-multiply relative z-10 cursor-grab active:cursor-grabbing"
+                            />
+                        </AnimatePresence>
 
                         {/* Arrows */}
                         {images.length > 1 && (
                             <>
                                 <button
-                                    onClick={() => setActiveImageIndex(prev => prev > 0 ? prev - 1 : images.length - 1)}
+                                    onClick={() => paginate(-1)}
                                     className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/50 hover:text-foreground opacity-0 group-hover:opacity-100 transition-opacity z-20"
                                 >
                                     <ChevronLeft size={36} strokeWidth={1} />
                                 </button>
                                 <button
-                                    onClick={() => setActiveImageIndex(prev => prev < images.length - 1 ? prev + 1 : 0)}
+                                    onClick={() => paginate(1)}
                                     className="absolute right-4 top-1/2 -translate-y-1/2 text-foreground/50 hover:text-foreground opacity-0 group-hover:opacity-100 transition-opacity z-20"
                                 >
                                     <ChevronRight size={36} strokeWidth={1} />
@@ -168,6 +225,17 @@ export default function ProductDetail({ product, similarProducts }: { product: P
                             </AccordionContent>
                         </AccordionItem>
 
+                        <AccordionItem value="benefits" className="border-border">
+                            <AccordionTrigger className="uppercase text-sm tracking-widest font-semibold pb-4 pt-5 hover:no-underline font-body">
+                                Key Benefits
+                            </AccordionTrigger>
+                            <AccordionContent className="text-muted-foreground">
+                                <ul className="list-disc pl-4 space-y-1">
+                                    {product.benefits.map((benefit, i) => <li key={i}>{benefit}</li>)}
+                                </ul>
+                            </AccordionContent>
+                        </AccordionItem>
+
                         <AccordionItem value="ingredients" className="border-border">
                             <AccordionTrigger className="uppercase text-sm tracking-widest font-semibold pb-4 pt-5 hover:no-underline font-body">
                                 Ingredients
@@ -194,8 +262,15 @@ export default function ProductDetail({ product, similarProducts }: { product: P
 
             {/* You Might Also Like Section */}
             {similarProducts.length > 0 && (
-                <div className="mt-32 border-t border-border pt-16">
-                    <h2 className="text-2xl font-display uppercase tracking-widest mb-10 text-foreground">You Might Also Like</h2>
+                <div className="mt-32 border-t border-border pt-16 overflow-hidden">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-2xl font-display uppercase tracking-widest mb-10 text-foreground"
+                    >
+                        You Might Also Like
+                    </motion.h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                         {similarProducts.map((p, idx) => (
                             <ProductCard key={p.id} product={p} index={idx} />

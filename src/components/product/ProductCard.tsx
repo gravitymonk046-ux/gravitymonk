@@ -19,7 +19,9 @@ const ProductCard = ({ product, index }: ProductCardProps) => {
 
   const handleAddToCart = () => {
     addToCart(product);
-    toast.success(`${product.name} added to cart`);
+    toast.success(`${product.name} added to cart`, {
+      icon: <ShoppingBag className="w-4 h-4 text-primary" />,
+    });
   };
 
   const handleBuyNow = () => {
@@ -28,9 +30,19 @@ const ProductCard = ({ product, index }: ProductCardProps) => {
   };
 
   const handleWishlist = () => {
+    const isAdding = !wishlisted;
     toggleWishlist(product.id);
-    setWishlisted(!wishlisted);
-    toast.success(wishlisted ? "Removed from wishlist" : "Added to wishlist");
+    setWishlisted(isAdding);
+
+    if (isAdding) {
+      toast.success(`${product.name} added to wishlist`, {
+        icon: <Heart className="w-4 h-4 text-destructive fill-destructive" />,
+      });
+    } else {
+      toast(`${product.name} removed from wishlist`, {
+        icon: <Heart className="w-4 h-4" />,
+      });
+    }
   };
 
   const handleShare = async () => {

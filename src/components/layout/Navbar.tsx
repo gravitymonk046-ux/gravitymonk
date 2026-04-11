@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { ShoppingBag, Heart, Menu, X } from "lucide-react";
+import { ShoppingBag, Heart, Menu, X, Search } from "lucide-react";
 import { getCartCount, getWishlist } from "@/lib/cart";
-
 
 interface NavbarProps {
   onCartOpen: () => void;
+  onSearchOpen?: () => void;
 }
 
-const Navbar = ({ onCartOpen }: NavbarProps) => {
+const Navbar = ({ onCartOpen, onSearchOpen }: NavbarProps) => {
   const [cartCount, setCartCount] = useState(0);
   const [wishlistCount, setWishlistCount] = useState(0);
   const [scrolled, setScrolled] = useState(false);
@@ -80,7 +80,7 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
                 transition={{ duration: 0.3 }}
                 className="font-display text-lg sm:text-2xl font-bold tracking-[0.1em] sm:tracking-[0.15em] text-black uppercase whitespace-nowrap absolute"
               >
-                Monk Gravity
+                Gravity Monk
               </motion.span>
               <motion.img
                 src="/images/logo.png"
@@ -107,6 +107,12 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
           </nav>
 
           <div className="flex items-center gap-1 sm:gap-2">
+            {onSearchOpen && (
+              <button onClick={onSearchOpen} className="p-2 text-[#0A3A2A] hover:bg-secondary/50 rounded-full transition-colors">
+                <Search size={20} />
+              </button>
+            )}
+
             <Link href="/wishlist" className="hidden sm:block p-2 relative text-[#0A3A2A] hover:bg-secondary/50 rounded-full transition-colors">
               <Heart size={20} />
               {wishlistCount > 0 && (
@@ -165,7 +171,7 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </motion.header >
   );
 };
 

@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, use } from "react";
-import { notFound } from "next/navigation";
+import { useState } from "react";
+import { notFound, useParams } from "next/navigation";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CartDrawer from "@/components/layout/CartDrawer";
@@ -9,8 +9,12 @@ import SearchOverlay from "@/components/layout/SearchOverlay";
 import ProductDetail from "@/components/product/ProductDetail";
 import { products } from "@/lib/products";
 
-export default function ProductPage({ params }: { params: Promise<{ id: string }> }) {
-    const { id } = use(params);
+export default function ProductPage() {
+    const params = useParams();
+    const id = params?.id as string;
+
+    if (!id) return null;
+
     const product = products.find((p) => p.id === id);
 
     if (!product) {

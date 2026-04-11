@@ -1,10 +1,15 @@
 import { Instagram, Mail, Phone } from "lucide-react";
-
+import { motion } from "framer-motion";
 
 const Footer = () => (
-  <footer id="contact" className="bg-foreground py-16">
+  <footer id="contact" className="bg-foreground py-16 overflow-hidden">
     <div className="container mx-auto px-6">
-      <div className="grid md:grid-cols-3 gap-12">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="grid md:grid-cols-3 gap-12"
+      >
         <div>
           <div className="flex items-center gap-4 mb-6">
             <img src="/images/logo.png" alt="Gravity Monk" className="h-12 w-auto rounded-md invert opacity-90" />
@@ -38,10 +43,16 @@ const Footer = () => (
             </a>
           </div>
         </div>
-      </div>
-      <div className="border-t border-background/10 mt-12 pt-8 text-center">
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.5 }}
+        className="border-t border-background/10 mt-12 pt-8 text-center"
+      >
         <p className="text-xs text-background/40">© 2026 Gravity Monk™. All rights reserved.</p>
-      </div>
+      </motion.div>
     </div>
   </footer>
 );
