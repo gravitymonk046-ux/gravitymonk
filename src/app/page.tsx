@@ -7,8 +7,10 @@ import ProductGrid from "@/components/sections/ProductGrid";
 import AboutSection from "@/components/sections/AboutSection";
 import FAQSection from "@/components/sections/FAQSection";
 // import Testimonials from "@/components/sections/Testimonials";
-import CartDrawer from "@/components/layout/CartDrawer";
-import SearchOverlay from "@/components/layout/SearchOverlay";
+import dynamic from "next/dynamic";
+
+const CartDrawer = dynamic(() => import("@/components/layout/CartDrawer"), { ssr: false });
+const SearchOverlay = dynamic(() => import("@/components/layout/SearchOverlay"), { ssr: false });
 import Footer from "@/components/layout/Footer";
 
 export default function Home() {

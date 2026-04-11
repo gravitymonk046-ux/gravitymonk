@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Heart, ShoppingBag, Share2, Star } from "lucide-react";
 import { Product } from "@/lib/products";
@@ -63,12 +64,13 @@ const ProductCard = ({ product, index }: ProductCardProps) => {
       className="card-product group relative"
     >
       <div className="relative overflow-hidden aspect-square">
-        <Link href={`/product/${product.id}`} className="block w-full h-full">
-          <img
+        <Link href={`/product/${product.id}`} className="block w-full h-full relative">
+          <Image
             src={product.image}
             alt={product.name}
-            loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
         </Link>
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-300" />

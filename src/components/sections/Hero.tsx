@@ -1,11 +1,18 @@
 import { motion } from "framer-motion";
+import Image from "next/image";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       <div className="absolute inset-0">
-        <img src={heroBg.src} alt="Handmade natural soaps" className="w-full h-full object-cover" width={1920} height={1080} />
+        <Image
+          src={heroBg}
+          alt="Handmade natural soaps"
+          fill
+          priority
+          className="object-cover"
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/60 to-transparent" />
       </div>
 

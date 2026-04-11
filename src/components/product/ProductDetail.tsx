@@ -9,6 +9,9 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/
 import ProductCard from "./ProductCard";
 import CheckoutDialog from "./CheckoutDialog";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+
+const MotionImage = motion(Image);
 
 export default function ProductDetail({ product, similarProducts }: { product: Product; similarProducts: Product[] }) {
     const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -97,7 +100,14 @@ export default function ProductDetail({ product, similarProducts }: { product: P
                                 className={`w-20 h-24 shrink-0 flex items-center justify-center relative overflow-hidden transition-all ${idx === activeImageIndex ? 'border-2 border-foreground opacity-100' : 'border border-transparent opacity-60 hover:opacity-100'}`}
                             >
                                 <div className="absolute inset-0 bg-[#e5decd]" />
-                                <img src={img} alt={`${product.name} thumbnail ${idx}`} className="object-cover w-full h-full mix-blend-multiply relative z-10" />
+                                <div className="relative w-full h-full mix-blend-multiply z-10">
+                                    <Image
+                                        src={img}
+                                        alt={`${product.name} thumbnail ${idx}`}
+                                        fill
+                                        className="object-cover"
+                                    />
+                                </div>
                             </button>
                         ))}
                     </div>
@@ -107,7 +117,7 @@ export default function ProductDetail({ product, similarProducts }: { product: P
                         <div className="absolute inset-0 bg-[#ebe5d6]" />
 
                         <AnimatePresence initial={false} custom={direction} mode="popLayout">
-                            <motion.img
+                            <MotionImage
                                 key={activeImageIndex}
                                 src={images[activeImageIndex]}
                                 custom={direction}
@@ -115,6 +125,7 @@ export default function ProductDetail({ product, similarProducts }: { product: P
                                 initial="enter"
                                 animate="center"
                                 exit="exit"
+                                fill
                                 transition={{
                                     x: { type: "spring", stiffness: 300, damping: 30 },
                                     opacity: { duration: 0.2 }
@@ -131,7 +142,7 @@ export default function ProductDetail({ product, similarProducts }: { product: P
                                     }
                                 }}
                                 alt={product.name}
-                                className="w-full h-full object-cover mix-blend-multiply relative z-10 cursor-grab active:cursor-grabbing"
+                                className="object-cover mix-blend-multiply relative z-10 cursor-grab active:cursor-grabbing"
                             />
                         </AnimatePresence>
 

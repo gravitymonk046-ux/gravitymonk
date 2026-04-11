@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Plus, Minus, Trash2, MessageCircle } from "lucide-react";
 import { getCart, updateQuantity, removeFromCart, getCartTotal, clearCart, checkoutWhatsApp, CartItem } from "@/lib/cart";
+import Image from "next/image";
 
 interface CartDrawerProps {
   open: boolean;
@@ -71,11 +72,14 @@ const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
                       exit={{ opacity: 0, x: -20 }}
                       className="flex gap-4"
                     >
-                      <img
-                        src={item.product.image}
-                        alt={item.product.name}
-                        className="w-20 h-20 object-cover rounded-lg"
-                      />
+                      <div className="relative w-20 h-20 shrink-0">
+                        <Image
+                          src={item.product.image}
+                          alt={item.product.name}
+                          fill
+                          className="object-cover rounded-lg"
+                        />
+                      </div>
                       <div className="flex-1">
                         <h4 className="font-display font-medium text-foreground">{item.product.name}</h4>
                         <p className="text-sm text-muted-foreground">{item.product.weight}</p>

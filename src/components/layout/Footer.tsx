@@ -1,4 +1,5 @@
 import { Instagram, Mail, Phone } from "lucide-react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const Footer = () => (
@@ -12,7 +13,7 @@ const Footer = () => (
       >
         <div>
           <div className="flex items-center gap-4 mb-6">
-            <img src="/images/logo.png" alt="Gravity Monk" className="h-12 w-auto rounded-md invert opacity-90" />
+            <Image src="/images/logo.png" alt="Gravity Monk" width={48} height={48} className="rounded-md invert opacity-90" />
             <span className="font-display text-xl text-background font-bold tracking-widest uppercase">Gravity Monk™</span>
           </div>
           <p className="text-sm text-background/60 leading-relaxed">
