@@ -80,6 +80,7 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
                 className="font-display text-lg sm:text-2xl font-bold tracking-[0.1em] sm:tracking-[0.15em] text-black uppercase whitespace-nowrap absolute"
               >
                 Gravity Monk
+                <span className="text-[8px] sm:text-[10px] inline-block -translate-y-[6px] sm:-translate-y-[10px] ml-0.5 text-black">TM</span>
               </motion.span>
               <motion.img
                 src="/images/logo.png"
