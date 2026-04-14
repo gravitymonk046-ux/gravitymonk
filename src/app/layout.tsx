@@ -62,9 +62,15 @@ export const metadata: Metadata = {
         },
     },
     icons: {
-        icon: '/images/logo.png',
-        apple: '/images/logo.png',
-    }
+        icon: [
+            { url: '/favicon.ico', sizes: 'any' },
+            { url: '/images/logo.png', sizes: '32x32', type: 'image/png' },
+        ],
+        apple: [
+            { url: '/images/logo.png', sizes: '180x180', type: 'image/png' },
+        ],
+    },
+    manifest: '/manifest.json',
 };
 
 export default function RootLayout({
