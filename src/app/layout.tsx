@@ -63,14 +63,14 @@ export const metadata: Metadata = {
     },
     icons: {
         icon: [
-            { url: '/favicon.ico?v=2', sizes: 'any' },
-            { url: '/images/logo.png?v=2', sizes: '32x32', type: 'image/png' },
+            { url: '/images/logo2.png?v=3', type: 'image/png' },
+            { url: '/favicon.ico?v=3', sizes: 'any' },
         ],
         apple: [
-            { url: '/images/logo.png?v=2', sizes: '180x180', type: 'image/png' },
+            { url: '/images/logo2.png?v=3', sizes: '180x180', type: 'image/png' },
         ],
     },
-    manifest: '/manifest.json?v=2',
+    manifest: '/manifest.json?v=3',
 };
 
 export default function RootLayout({
