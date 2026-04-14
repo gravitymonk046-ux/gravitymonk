@@ -71,12 +71,28 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
         <div className="flex justify-center items-center h-full">
           <Link href="/" className="flex flex-col items-center justify-center">
             <div className="relative flex justify-center items-center h-10 min-w-[140px] sm:min-w-[200px]">
-
+              <motion.span
+                animate={{
+                  opacity: scrolled ? 0 : 1,
+                  scale: scrolled ? 0.95 : 1,
+                  pointerEvents: scrolled ? "none" : "auto"
+                }}
+                transition={{ duration: 0.3 }}
+                className="font-display text-lg sm:text-2xl font-bold tracking-[0.1em] sm:tracking-[0.15em] text-black uppercase whitespace-nowrap absolute"
+              >
+                Gravity Monk
+                <span className="text-[8px] sm:text-[10px] inline-block -translate-y-[6px] sm:-translate-y-[10px] ml-0.5 text-black">TM</span>
+              </motion.span>
               <motion.img
                 src="/images/logo.png"
                 alt="Gravity Monk"
-                className="h-10 w-auto rounded-md"
-                initial={{ opacity: 1 }}
+                animate={{
+                  opacity: scrolled ? 1 : 0,
+                  scale: scrolled ? 1 : 0.95,
+                  pointerEvents: scrolled ? "auto" : "none"
+                }}
+                transition={{ duration: 0.3 }}
+                className="h-10 w-auto rounded-md absolute"
               />
             </div>
           </Link>
