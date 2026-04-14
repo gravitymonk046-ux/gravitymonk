@@ -13,6 +13,7 @@ export interface Product {
   benefits: string[];
   rating: number;
   reviews: number;
+  outOfStock?: boolean;
 }
 
 export const products: Product[] = [
@@ -79,6 +80,7 @@ export const products: Product[] = [
     benefits: ["Deep hydration", "Soothes skin", "Anti-aging properties", "Natural glow enhancer"],
     rating: 4.9,
     reviews: 89,
+    outOfStock: true,
   },
   {
     id: "shea-butter",

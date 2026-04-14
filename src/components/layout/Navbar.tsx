@@ -37,10 +37,7 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
   const navLinks = ["Shop", "About", "Ingredients", "Contact"];
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+    <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 h-16 min-h-[64px] max-h-[64px] overflow-hidden ${scrolled ? "glass-panel shadow-sm border-b" : "bg-transparent"
         }`}
     >
@@ -169,7 +166,7 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header >
+    </header >
   );
 };
 

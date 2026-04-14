@@ -33,22 +33,12 @@ const FAQSection = () => {
     return (
         <section id="faq" className="py-20 md:py-32 bg-white">
             <div className="container mx-auto px-6 max-w-4xl">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-16"
-                >
+                <div className="text-center mb-16">
                     <p className="badge-category mb-4">Common Questions</p>
                     <h2 className="heading-section">Frequently Asked Questions</h2>
-                </motion.div>
+                </div>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 }}
-                >
+                <div>
                     <Accordion type="single" collapsible className="w-full">
                         {faqs.map((faq, index) => (
                             <AccordionItem key={index} value={`item-${index}`} className="border-b border-secondary">
@@ -61,7 +51,7 @@ const FAQSection = () => {
                             </AccordionItem>
                         ))}
                     </Accordion>
-                </motion.div>
+                </div>
             </div>
         </section>
     );

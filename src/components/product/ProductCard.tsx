@@ -56,13 +56,7 @@ const ProductCard = ({ product, index }: ProductCardProps) => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="card-product group relative"
-    >
+    <div className={`card-product group relative ${product.outOfStock ? "opacity-90" : ""}`}>
       <div className="relative overflow-hidden aspect-square">
         <Link href={`/product/${product.id}`} className="block w-full h-full relative">
           <Image
@@ -70,12 +64,12 @@ const ProductCard = ({ product, index }: ProductCardProps) => {
             alt={product.name}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            className={`object-cover transition-transform duration-700 ${!product.outOfStock ? "group-hover:scale-105" : "grayscale"}`}
           />
         </Link>
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-300" />
-
-
+        {!product.outOfStock && (
+          <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-300" />
+        )}
 
         <div className="absolute top-4 right-4 flex flex-col gap-2 pointer-events-auto">
           <button
@@ -84,15 +78,21 @@ const ProductCard = ({ product, index }: ProductCardProps) => {
           >
             <Heart size={18} className={wishlisted ? "fill-destructive text-destructive" : "text-foreground"} />
           </button>
-          <button
-            onClick={handleShare}
-            className="w-10 h-10 rounded-full bg-card/90 backdrop-blur flex items-center justify-center transition-all hover:scale-110 opacity-0 group-hover:opacity-100"
-          >
-            <Share2 size={16} className="text-foreground" />
-          </button>
+          {!product.outOfStock && (
+            <button
+              onClick={handleShare}
+              className="w-10 h-10 rounded-full bg-card/90 backdrop-blur flex items-center justify-center transition-all hover:scale-110 opacity-0 group-hover:opacity-100"
+            >
+              <Share2 size={16} className="text-foreground" />
+            </button>
+          )}
         </div>
 
-        {product.originalPrice && (
+        {product.outOfStock ? (
+          <span className="absolute top-4 left-4 bg-destructive text-destructive-foreground px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase shadow-lg">
+            Out of Stock
+          </span>
+        ) : product.originalPrice && (
           <span className="absolute top-4 left-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-medium">
             Save ₹{product.originalPrice - product.price}
           </span>
@@ -121,21 +121,27 @@ const ProductCard = ({ product, index }: ProductCardProps) => {
 
         <div className="flex gap-2">
           <button
-            onClick={handleAddToCart}
-            className="btn-primary flex-1 flex items-center justify-center gap-2 py-3 text-[10px] sm:text-xs hover:scale-[1.02] active:scale-[0.98] transition-all"
+            onClick={!product.outOfStock ? handleAddToCart : undefined}
+            disabled={product.outOfStock}
+            className={`flex-1 flex items-center justify-center gap-2 py-3 text-[10px] sm:text-xs transition-all ${product.outOfStock
+              ? "bg-muted text-muted-foreground cursor-not-allowed rounded-full"
+              : "btn-primary hover:scale-[1.02] active:scale-[0.98]"
+              }`}
           >
-            Add to Cart
+            {product.outOfStock ? "Unavailable" : "Add to Cart"}
           </button>
-          <button
-            onClick={handleBuyNow}
-            className="bg-foreground text-background flex-1 flex items-center justify-center gap-2 py-3 text-[10px] sm:text-xs hover:bg-foreground/90 hover:scale-[1.02] active:scale-[0.98] transition-all"
-          >
-            Buy Now
-          </button>
+          {!product.outOfStock && (
+            <button
+              onClick={handleBuyNow}
+              className="bg-foreground text-background flex-1 flex items-center justify-center gap-2 py-3 text-[10px] sm:text-xs hover:bg-foreground/90 hover:scale-[1.02] active:scale-[0.98] transition-all"
+            >
+              Buy Now
+            </button>
+          )}
         </div>
       </div>
       <CheckoutDialog open={isCheckoutOpen} onOpenChange={setIsCheckoutOpen} />
-    </motion.div>
+    </div>
   );
 };
 

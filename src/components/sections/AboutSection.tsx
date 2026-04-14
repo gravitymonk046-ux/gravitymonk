@@ -11,12 +11,7 @@ const AboutSection = () => (
   <section id="about" className="py-20 md:py-32 bg-secondary/50">
     <div className="container mx-auto px-6">
       <div className="grid md:grid-cols-2 gap-16 items-center">
-        <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
+        <div>
           <p className="badge-category mb-4 inline-block">Our Philosophy</p>
           <h2 className="heading-section mb-6">
             Inked in Nature, <br />
@@ -28,22 +23,12 @@ const AboutSection = () => (
             only the most pristine botanical ingredients and time-honored methods.
           </p>
           <a href="#shop" className="btn-primary">Explore Products</a>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="grid gap-6"
-        >
-          {features.map(({ icon: Icon, title, desc }, i) => (
-            <motion.div
+        <div className="grid gap-6">
+          {features.map(({ icon: Icon, title, desc }) => (
+            <div
               key={title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
               className="flex items-start gap-5 p-6 rounded-2xl bg-card"
             >
               <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
@@ -53,9 +38,9 @@ const AboutSection = () => (
                 <h4 className="font-display text-lg font-medium mb-1 text-foreground">{title}</h4>
                 <p className="text-sm text-muted-foreground">{desc}</p>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </div>
   </section>

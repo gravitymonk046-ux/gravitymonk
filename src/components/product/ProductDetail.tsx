@@ -142,7 +142,7 @@ export default function ProductDetail({ product, similarProducts }: { product: P
                                     }
                                 }}
                                 alt={product.name}
-                                className="object-cover mix-blend-multiply relative z-10 cursor-grab active:cursor-grabbing"
+                                className={`object-cover mix-blend-multiply relative z-10 cursor-grab active:cursor-grabbing ${product.outOfStock ? 'grayscale' : ''}`}
                             />
                         </AnimatePresence>
 
@@ -163,6 +163,13 @@ export default function ProductDetail({ product, similarProducts }: { product: P
                                 </button>
                             </>
                         )}
+                        {product.outOfStock && (
+                            <div className="absolute top-4 left-4 z-30">
+                                <span className="bg-destructive text-destructive-foreground px-4 py-2 rounded-full text-xs font-bold tracking-widest uppercase shadow-xl">
+                                    Out of Stock
+                                </span>
+                            </div>
+                        )}
                     </div>
                 </div>
 
@@ -181,41 +188,50 @@ export default function ProductDetail({ product, similarProducts }: { product: P
                         {product.weight}
                     </p>
 
-                    <div className="mb-8">
-                        <label className="block text-sm mb-3 font-medium">Quantity:</label>
-                        <div className="flex items-center border border-border w-fit">
-                            <button
-                                onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
-                                className="px-4 py-3 hover:bg-secondary transition-colors border-r border-border"
-                            >
-                                <Minus size={16} />
-                            </button>
-                            <span className="px-8 py-3 font-medium min-w-[60px] text-center">
-                                {quantity}
-                            </span>
-                            <button
-                                onClick={() => setQuantity(prev => prev + 1)}
-                                className="px-4 py-3 hover:bg-secondary transition-colors border-l border-border"
-                            >
-                                <Plus size={16} />
-                            </button>
-                        </div>
-                    </div>
+                    {!product.outOfStock ? (
+                        <>
+                            <div className="mb-8">
+                                <label className="block text-sm mb-3 font-medium">Quantity:</label>
+                                <div className="flex items-center border border-border w-fit">
+                                    <button
+                                        onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
+                                        className="px-4 py-3 hover:bg-secondary transition-colors border-r border-border"
+                                    >
+                                        <Minus size={16} />
+                                    </button>
+                                    <span className="px-8 py-3 font-medium min-w-[60px] text-center">
+                                        {quantity}
+                                    </span>
+                                    <button
+                                        onClick={() => setQuantity(prev => prev + 1)}
+                                        className="px-4 py-3 hover:bg-secondary transition-colors border-l border-border"
+                                    >
+                                        <Plus size={16} />
+                                    </button>
+                                </div>
+                            </div>
 
-                    <div className="flex flex-col sm:flex-row gap-4 mb-2 lg:w-[90%]">
-                        <button
-                            onClick={handleAddToCart}
-                            className="flex-1 border border-foreground bg-transparent hover:bg-secondary text-foreground transition-colors duration-300 py-4 uppercase text-sm tracking-widest font-medium"
-                        >
-                            Add to Cart
-                        </button>
-                        <button
-                            onClick={handleBuyNow}
-                            className="flex-1 border border-foreground bg-foreground text-background hover:bg-foreground/90 transition-colors duration-300 py-4 uppercase text-sm tracking-widest font-medium"
-                        >
-                            Buy Now
-                        </button>
-                    </div>
+                            <div className="flex flex-col sm:flex-row gap-4 mb-2 lg:w-[90%]">
+                                <button
+                                    onClick={handleAddToCart}
+                                    className="flex-1 border border-foreground bg-transparent hover:bg-secondary text-foreground transition-colors duration-300 py-4 uppercase text-sm tracking-widest font-medium"
+                                >
+                                    Add to Cart
+                                </button>
+                                <button
+                                    onClick={handleBuyNow}
+                                    className="flex-1 border border-foreground bg-foreground text-background hover:bg-foreground/90 transition-colors duration-300 py-4 uppercase text-sm tracking-widest font-medium"
+                                >
+                                    Buy Now
+                                </button>
+                            </div>
+                        </>
+                    ) : (
+                        <div className="mb-12 p-6 bg-secondary/30 border border-border rounded-xl">
+                            <p className="text-foreground font-display text-lg mb-2">Currently Unavailable</p>
+                            <p className="text-sm text-muted-foreground">This artisanal soap is currently out of stock. Check back soon for our next fresh batch!</p>
+                        </div>
+                    )}
 
                     <button
                         onClick={handleShare}

@@ -26,17 +26,12 @@ const ProductGrid = () => {
   return (
     <section id="shop" className="py-20 md:py-32">
       <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <h2 className="heading-section mb-4">Our Collection</h2>
           <p className="body-large max-w-xl mx-auto">
             Each bar is handcrafted with love, using only the finest natural ingredients.
           </p>
-        </motion.div>
+        </div>
 
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10">
           <div className="flex flex-wrap gap-2">
