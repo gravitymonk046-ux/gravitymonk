@@ -101,14 +101,6 @@ export default function RootLayout({
         },
         {
             '@context': 'https://schema.org',
-            '@type': 'Product',
-            name: 'Handmade Natural Soap',
-            brand: 'Gravity Monk',
-            description: 'Premium handmade natural soap for healthy glowing skin',
-            image: 'https://gravitymonk.com/images/og-image.jpg',
-        },
-        {
-            '@context': 'https://schema.org',
             "@type": "BreadcrumbList",
             "itemListElement": [
                 {
