@@ -1,39 +1,68 @@
-"use client";
-
-import { useState } from "react";
-import { notFound, useParams } from "next/navigation";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import CartDrawer from "@/components/layout/CartDrawer";
-import ProductDetail from "@/components/product/ProductDetail";
+import { Metadata } from 'next';
+import { notFound } from "next/navigation";
 import { products } from "@/lib/products";
+import ProductPageClient from "./ProductPageClient";
 
-export default function ProductPage() {
-    const params = useParams();
-    const id = params?.id as string;
+interface Props {
+    params: Promise<{ id: string }>;
+}
 
-    if (!id) return null;
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { id } = await params;
+    const product = products.find((p) => p.id === id);
 
+    if (!product) return {};
+
+    return {
+        title: `${product.name} | Natural Handmade Soap`,
+        description: `${product.description} Experience the ritual of purity with Gravity Monk™ ${product.name} soap.`,
+        alternates: {
+            canonical: `https://gravitymonk.com/product/${id}`,
+        },
+        openGraph: {
+            title: `${product.name} | Gravity Monk™`,
+            description: product.description,
+            images: [{ url: product.image }],
+        },
+    };
+}
+
+export default async function ProductPage({ params }: Props) {
+    const { id } = await params;
     const product = products.find((p) => p.id === id);
 
     if (!product) {
         notFound();
     }
 
-    const [cartOpen, setCartOpen] = useState(false);
-
     const similarProducts = products.filter(p => p.id !== product.id).slice(0, 3);
 
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: product.name,
+        image: `https://gravitymonk.com${product.image}`,
+        description: product.description,
+        brand: {
+            '@type': 'Brand',
+            name: 'Gravity Monk™',
+        },
+        offers: {
+            '@type': 'Offer',
+            url: `https://gravitymonk.com/product/${id}`,
+            priceCurrency: 'INR',
+            price: product.price,
+            availability: product.outOfStock ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock',
+        },
+    };
+
     return (
-        <div className="flex flex-col min-h-screen bg-background">
-            <Navbar onCartOpen={() => setCartOpen(true)} />
-
-            <main className="flex-1 mt-[80px]">
-                <ProductDetail product={product} similarProducts={similarProducts} />
-            </main>
-
-            <Footer />
-            <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
-        </div>
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
+            <ProductPageClient product={product} similarProducts={similarProducts} />
+        </>
     );
 }

@@ -11,16 +11,16 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
     title: {
-        default: 'Gravity Monk™ | Best Handmade Face & Body Soaps in Kerala',
+        default: 'Gravity Monk™ – Handmade Natural Soaps for Skin Rituals',
         template: '%s | Gravity Monk™'
     },
-    description: 'Gravity Monk™ offers nature\'s finest handmade face and body soaps in Kerala, India. Crafted with premium natural ingredients for glowing, healthy skin. Discover our organic, cruelty-free, and chemical-free skincare rituals.',
+    description: 'Elevate your skincare ritual with handcrafted natural soaps by Gravity Monk™. Pure, chemical-free, and made for glowing healthy skin.',
     keywords: [
         'handmade soap', 'natural skincare', 'organic body soap', 'artisan soaps', 
         'Gravity Monk', 'chemical-free soap', 'vegan skincare', 'premium handmade soap',
-        'best soap kerala', 'natural soap india', 'handmade soaps in kerala', 
-        'luxury soaps india', 'cold process soap kerala', 'eco-friendly skincare india',
-        'herbal soaps kerala', 'skincare ritual india'
+        'best handmade soap for glowing skin', 'natural soap for men and women',
+        'chemical free soap india', 'organic skincare kerala', 'luxury handmade soap india',
+        'best soap kerala', 'natural soap india', 'handmade soaps in kerala'
     ],
     authors: [{ name: 'Gravity Monk' }],
     creator: 'Gravity Monk',
@@ -68,13 +68,9 @@ export const metadata: Metadata = {
         },
     },
     icons: {
-        icon: [
-            { url: '/images/logo2.png?v=3', type: 'image/png' },
-            { url: '/favicon.ico?v=3', sizes: 'any' },
-        ],
-        apple: [
-            { url: '/images/logo2.png?v=3', sizes: '180x180', type: 'image/png' },
-        ],
+        icon: '/favicon.ico?v=3',
+        shortcut: '/favicon.ico?v=3',
+        apple: '/images/logo2.png?v=3',
     },
     manifest: '/manifest.json?v=3',
 };
@@ -91,7 +87,7 @@ export default function RootLayout({
             name: 'Gravity Monk™',
             description: 'Handmade Face & Body Soaps crafted with Nature\'s Finest Ingredients.',
             url: 'https://gravitymonk.com',
-            logo: 'https://gravitymonk.com/images/logo.png',
+            logo: 'https://gravitymonk.com/images/logo2.png',
             contactPoint: {
                 '@type': 'ContactPoint',
                 telephone: '+919207090505',
@@ -102,6 +98,26 @@ export default function RootLayout({
             sameAs: [
                 'https://www.instagram.com/gravitymonk',
             ],
+        },
+        {
+            '@context': 'https://schema.org',
+            '@type': 'Product',
+            name: 'Handmade Natural Soap',
+            brand: 'Gravity Monk',
+            description: 'Premium handmade natural soap for healthy glowing skin',
+            image: 'https://gravitymonk.com/images/og-image.jpg',
+        },
+        {
+            '@context': 'https://schema.org',
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://gravitymonk.com"
+                }
+            ]
         },
         {
             '@context': 'https://schema.org',

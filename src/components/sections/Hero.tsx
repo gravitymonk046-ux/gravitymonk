@@ -8,7 +8,7 @@ const Hero = () => {
       <div className="absolute inset-0">
         <Image
           src={heroBg}
-          alt="Handmade natural soaps"
+          alt="Handmade natural organic soaps by Gravity Monk™ - Premium skincare ritual"
           fill
           priority
           className="object-cover"

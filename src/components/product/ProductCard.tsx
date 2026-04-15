@@ -61,7 +61,7 @@ const ProductCard = ({ product, index }: ProductCardProps) => {
         <Link href={`/product/${product.id}`} className="block w-full h-full relative">
           <Image
             src={product.image}
-            alt={product.name}
+            alt={`${product.name} - Handmade Natural ${product.category} Soap by Gravity Monk™`}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className={`object-cover transition-transform duration-700 ${!product.outOfStock ? "group-hover:scale-105" : "grayscale"}`}
