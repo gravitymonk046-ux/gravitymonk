@@ -11,11 +11,17 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
     title: {
-        default: 'Gravity Monk™ | Handmade Face & Body Soaps',
+        default: 'Gravity Monk™ | Best Handmade Face & Body Soaps in Kerala',
         template: '%s | Gravity Monk™'
     },
-    description: 'Discover Gravity Monk™ - Nature\'s finest handmade face and body soaps. Crafted with premium natural ingredients for glowing, healthy skin. Organic, cruelty-free, and chemical-free skincare.',
-    keywords: ['handmade soap', 'natural skincare', 'organic body soap', 'artisan soaps', 'Gravity Monk', 'chemical-free soap', 'vegan skincare', 'premium handmade soap'],
+    description: 'Gravity Monk™ offers nature\'s finest handmade face and body soaps in Kerala, India. Crafted with premium natural ingredients for glowing, healthy skin. Discover our organic, cruelty-free, and chemical-free skincare rituals.',
+    keywords: [
+        'handmade soap', 'natural skincare', 'organic body soap', 'artisan soaps', 
+        'Gravity Monk', 'chemical-free soap', 'vegan skincare', 'premium handmade soap',
+        'best soap kerala', 'natural soap india', 'handmade soaps in kerala', 
+        'luxury soaps india', 'cold process soap kerala', 'eco-friendly skincare india',
+        'herbal soaps kerala', 'skincare ritual india'
+    ],
     authors: [{ name: 'Gravity Monk' }],
     creator: 'Gravity Monk',
     publisher: 'Gravity Monk',
