@@ -113,6 +113,30 @@ export const products: Product[] = [
     rating: 4.9,
     reviews: 203,
   },
+  {
+    id: "all-soaps-combo",
+    name: "Complete Care Combo",
+    subtitle: "All 6 Premium Handmade Soaps",
+    price: 917,
+    originalPrice: 1222,
+    image: "/images/combo.jpeg",
+    images: [
+      "/images/combo.jpeg",
+      "/images/Charcoal - Front Side.jpg",
+      "/images/Turmeric - Front Side.jpg",
+      "/images/Coffee - Front Side.jpg",
+      "/images/Rose - Front Side.jpg",
+      "/images/Shea Butter - Front Side.jpg",
+      "/images/The Magic - Front Side.jpg"
+    ],
+    category: "Combo",
+    description: "Get the complete collection of all 6 premium handmade face and body soaps. Includes Charcoal, Turmeric, Coffee, Rose, Shea Butter, and The Magic at a special 25% discount. The ultimate skincare bundle.",
+    weight: "6 x 100g",
+    ingredients: ["Activated charcoal", "Turmeric extract", "Organic coffee", "Rose oil", "Shea butter", "Essential oils"],
+    benefits: ["Complete skin care solution", "25% Combo Discount", "Perfect for gifting", "All skin types"],
+    rating: 5.0,
+    reviews: 128,
+  }
 ];
 
-export const categories = ["All", "Exfoliating", "Moisturizing", "Premium", "Brightening", "Deep Cleansing"];
+export const categories = ["All", "Combo", "Exfoliating", "Moisturizing", "Premium", "Brightening", "Deep Cleansing"];
