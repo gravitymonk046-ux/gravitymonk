@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -7,7 +7,7 @@ import Script from 'next/script';
 
 import { MessageCircle } from "lucide-react";
 
-const inter = Inter({ subsets: ['latin'] });
+const poppins = Poppins({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700', '800', '900'] });
 
 export const metadata: Metadata = {
     title: {
@@ -156,7 +156,7 @@ export default function RootLayout({
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
                 />
             </head>
-            <body className={inter.className}>
+            <body className={poppins.className}>
                 <Providers>
                     {children}
                     <Sonner />
