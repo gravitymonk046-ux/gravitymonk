@@ -119,9 +119,9 @@ export const products: Product[] = [
     subtitle: "All 6 Premium Handmade Soaps",
     price: 917,
     originalPrice: 1222,
-    image: "/images/combo.jpeg",
+    image: "/images/combo2.png",
     images: [
-      "/images/combo.jpeg",
+      "/images/combo2.png",
       "/images/Charcoal - Front Side.jpg",
       "/images/Turmeric - Front Side.jpg",
       "/images/Coffee - Front Side.jpg",

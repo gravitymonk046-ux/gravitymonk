@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Minus, Plus, Share2, ShoppingBag, Heart } from "lucide-react";
+import { ChevronLeft, ChevronRight, Minus, Plus, Share2, ShoppingBag, Heart, Truck } from "lucide-react";
 import { Product } from "@/lib/products";
 import { addToCart } from "@/lib/cart";
 import { toast } from "sonner";
@@ -178,7 +178,16 @@ export default function ProductDetail({ product, similarProducts }: { product: P
                     <h1 className="text-3xl md:text-4xl font-display font-medium tracking-wide uppercase mb-4 text-foreground">
                         {product.name} · {product.subtitle.toUpperCase()}
                     </h1>
-                    <p className="text-lg mb-8 font-medium">₹{product.price}</p>
+                    <div className="flex items-center gap-4 mb-4">
+                        <p className="text-lg font-medium">₹{product.price}</p>
+                        {product.originalPrice && (
+                            <p className="text-sm text-muted-foreground line-through">₹{product.originalPrice}</p>
+                        )}
+                    </div>
+                    <div className="inline-flex items-center gap-2 text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-full px-4 py-2 mb-8">
+                        <Truck size={16} />
+                        Free Delivery on this order
+                    </div>
 
                     <p className="text-muted-foreground text-sm leading-relaxed mb-6 font-semibold">
                         {product.description}
@@ -279,7 +288,8 @@ export default function ProductDetail({ product, similarProducts }: { product: P
                                 Shipping & Returns
                             </AccordionTrigger>
                             <AccordionContent className="text-muted-foreground leading-relaxed">
-                                Free shipping on all orders over ₹1000. Orders are processed within 1-2 business days.
+                                <span className="inline-flex items-center gap-1.5 text-green-700 font-semibold"><Truck size={14}/> Free shipping on ALL orders — no minimum required!</span><br /><br />
+                                Orders are processed within 1–2 business days and typically delivered in 3–5 business days.
                                 Returns are accepted within 30 days of purchase for unused products in original packaging.
                             </AccordionContent>
                         </AccordionItem>

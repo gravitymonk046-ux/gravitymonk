@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { ShoppingBag, Heart, Menu, X } from "lucide-react";
+import { ShoppingBag, Heart, Menu, X, Truck } from "lucide-react";
 import { getCartCount, getWishlist } from "@/lib/cart";
 
 interface NavbarProps {
@@ -166,7 +166,7 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
           </motion.div>
         )}
       </AnimatePresence>
-    </header >
+    </header>
   );
 };
 

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Heart, ShoppingBag, Share2, Star } from "lucide-react";
+import { Heart, ShoppingBag, Share2, Star, Truck } from "lucide-react";
 import { Product } from "@/lib/products";
 import { addToCart, toggleWishlist, isInWishlist, checkoutWhatsApp } from "@/lib/cart";
 import { useState } from "react";
@@ -112,11 +112,15 @@ const ProductCard = ({ product, index }: ProductCardProps) => {
         <p className="text-sm text-muted-foreground mb-1">{product.subtitle}</p>
         <p className="text-xs text-muted-foreground mb-3 line-clamp-2">{product.description}</p>
 
-        <div className="flex items-center gap-3 mb-6">
+        <div className="flex items-center gap-3 mb-3">
           <span className="font-display text-xl font-semibold text-foreground">₹{product.price}</span>
           {product.originalPrice && (
             <span className="text-sm text-muted-foreground line-through">₹{product.originalPrice}</span>
           )}
+        </div>
+        <div className="flex items-center gap-1.5 text-xs font-semibold text-green-700 bg-green-50 border border-green-200 rounded-full px-3 py-1 w-fit mb-4">
+          <Truck size={12} />
+          Free Delivery
         </div>
 
         <div className="flex gap-2">
