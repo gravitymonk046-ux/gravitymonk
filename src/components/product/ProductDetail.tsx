@@ -180,9 +180,6 @@ export default function ProductDetail({ product, similarProducts }: { product: P
                     </h1>
                     <div className="flex items-center gap-4 mb-4">
                         <p className="text-lg font-medium">₹{product.price}</p>
-                        {product.originalPrice && (
-                            <p className="text-sm text-muted-foreground line-through">₹{product.originalPrice}</p>
-                        )}
                     </div>
                     <div className="inline-flex items-center gap-2 text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-full px-4 py-2 mb-8">
                         <Truck size={16} />

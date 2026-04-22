@@ -88,13 +88,9 @@ const ProductCard = ({ product, index }: ProductCardProps) => {
           )}
         </div>
 
-        {product.outOfStock ? (
+        {product.outOfStock && (
           <span className="absolute top-4 left-4 bg-destructive text-destructive-foreground px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase shadow-lg">
             Out of Stock
-          </span>
-        ) : product.originalPrice && (
-          <span className="absolute top-4 left-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-medium">
-            Save ₹{product.originalPrice - product.price}
           </span>
         )}
       </div>
@@ -114,9 +110,6 @@ const ProductCard = ({ product, index }: ProductCardProps) => {
 
         <div className="flex items-center gap-3 mb-3">
           <span className="font-display text-xl font-semibold text-foreground">₹{product.price}</span>
-          {product.originalPrice && (
-            <span className="text-sm text-muted-foreground line-through">₹{product.originalPrice}</span>
-          )}
         </div>
         <div className="flex items-center gap-1.5 text-xs font-semibold text-green-700 bg-green-50 border border-green-200 rounded-full px-3 py-1 w-fit mb-4">
           <Truck size={12} />
