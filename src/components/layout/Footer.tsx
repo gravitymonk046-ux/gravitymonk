@@ -9,9 +9,9 @@ const Footer = () => (
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="grid md:grid-cols-3 gap-12"
+        className="grid md:grid-cols-4 gap-12"
       >
-        <div>
+        <div className="md:col-span-1">
           <div className="flex items-center gap-4 mb-6">
             <Image src="/images/logo.png" alt="Gravity Monk" width={48} height={48} className="rounded-md invert opacity-90" />
             <span className="font-display text-xl text-background font-bold tracking-widest uppercase">Gravity Monk™</span>
@@ -23,11 +23,19 @@ const Footer = () => (
         <div>
           <h4 className="font-display text-background text-lg mb-4">Quick Links</h4>
           <nav className="flex flex-col gap-2">
-            {["Shop", "About", "Ingredients", "Contact"].map((l) => (
-              <a key={l} href={`#${l.toLowerCase()}`} className="text-sm text-background/60 hover:text-background transition-colors">
-                {l}
-              </a>
-            ))}
+            <a href="/#shop" className="text-sm text-background/60 hover:text-background transition-colors">Shop</a>
+            <a href="/about" className="text-sm text-background/60 hover:text-background transition-colors">About</a>
+            <a href="/#ingredients" className="text-sm text-background/60 hover:text-background transition-colors">Ingredients</a>
+            <a href="/contact" className="text-sm text-background/60 hover:text-background transition-colors">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4 className="font-display text-background text-lg mb-4">Legal & Policies</h4>
+          <nav className="flex flex-col gap-2">
+            <a href="/privacy" className="text-sm text-background/60 hover:text-background transition-colors">Privacy Policy</a>
+            <a href="/terms" className="text-sm text-background/60 hover:text-background transition-colors">Terms of Service</a>
+            <a href="/refund-policy" className="text-sm text-background/60 hover:text-background transition-colors">Refund Policy</a>
+            <a href="/shipping-policy" className="text-sm text-background/60 hover:text-background transition-colors">Shipping Policy</a>
           </nav>
         </div>
         <div>
