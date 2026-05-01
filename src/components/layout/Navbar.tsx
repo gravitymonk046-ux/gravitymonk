@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { ShoppingBag, Heart, Menu, X, Truck } from "lucide-react";
+import { ShoppingBag, Heart, Menu, X } from "lucide-react";
 import { getCartCount, getWishlist } from "@/lib/cart";
 
 interface NavbarProps {
@@ -44,7 +44,7 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
       <div className="container mx-auto px-6 h-full grid grid-cols-3 items-center">
         {/* Left Section: Nav Links & Mobile Wishlist */}
         <div className="flex items-center h-full">
-          <Link href="/wishlist" className="sm:hidden p-2 -ml-2 text-[#0A3A2A] relative">
+          <Link href="/wishlist" className={`sm:hidden p-2 -ml-2 relative ${scrolled ? "text-[#0A3A2A]" : "text-white"}`}>
             <Heart size={20} />
             {wishlistCount > 0 && (
               <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-primary text-primary-foreground text-[10px] flex items-center justify-center">
@@ -52,12 +52,12 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
               </span>
             )}
           </Link>
-          <button onClick={() => setMobileOpen(true)} className="hidden sm:flex md:hidden p-2 text-[#0A3A2A]">
+          <button onClick={() => setMobileOpen(true)} className={`hidden sm:flex md:hidden p-2 ${scrolled ? "text-[#0A3A2A]" : "text-white"}`}>
             <Menu size={22} />
           </button>
           <nav className="hidden md:flex items-center gap-6">
             {navLinks.slice(0, 2).map((link) => (
-              <a key={link} href={`#${link.toLowerCase()}`} className="text-black text-[12px] uppercase tracking-widest font-bold hover:opacity-70 transition-opacity whitespace-nowrap">
+              <a key={link} href={`#${link.toLowerCase()}`} className={`text-[12px] uppercase tracking-widest font-bold hover:opacity-70 transition-colors whitespace-nowrap ${scrolled ? "text-[#0A3A2A]" : "text-white"}`}>
                 {link}
               </a>
             ))}
@@ -75,10 +75,10 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
                   pointerEvents: scrolled ? "none" : "auto"
                 }}
                 transition={{ duration: 0.3 }}
-                className="font-display text-lg sm:text-2xl font-bold tracking-[0.1em] sm:tracking-[0.15em] text-black uppercase whitespace-nowrap absolute"
+                className="font-display text-lg sm:text-2xl font-bold tracking-[0.1em] sm:tracking-[0.15em] text-white uppercase whitespace-nowrap absolute"
               >
                 Gravity Monk
-                <span className="text-[8px] sm:text-[10px] inline-block -translate-y-[6px] sm:-translate-y-[10px] ml-0.5 text-black">TM</span>
+                <span className="text-[8px] sm:text-[10px] inline-block -translate-y-[6px] sm:-translate-y-[10px] ml-0.5 text-white">TM</span>
               </motion.span>
               <motion.img
                 src="/images/logo.png"
@@ -99,7 +99,7 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
         <div className="flex items-center justify-end h-full">
           <nav className="hidden lg:flex items-center gap-6 mr-8">
             {navLinks.slice(2).map((link) => (
-              <a key={link} href={`#${link.toLowerCase()}`} className="text-black text-[12px] uppercase tracking-widest font-bold hover:opacity-70 transition-opacity whitespace-nowrap">
+              <a key={link} href={`#${link.toLowerCase()}`} className={`text-[12px] uppercase tracking-widest font-bold hover:opacity-70 transition-colors whitespace-nowrap ${scrolled ? "text-[#0A3A2A]" : "text-white"}`}>
                 {link}
               </a>
             ))}
@@ -108,7 +108,7 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
           <div className="flex items-center gap-1 sm:gap-2">
 
 
-            <Link href="/wishlist" className="hidden sm:block p-2 relative text-[#0A3A2A] hover:bg-secondary/50 rounded-full transition-colors">
+            <Link href="/wishlist" className={`hidden sm:block p-2 relative hover:bg-secondary/50 rounded-full transition-colors ${scrolled ? "text-[#0A3A2A]" : "text-white"}`}>
               <Heart size={20} />
               {wishlistCount > 0 && (
                 <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-primary text-primary-foreground text-[10px] flex items-center justify-center">
@@ -117,7 +117,7 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
               )}
             </Link>
 
-            <button onClick={onCartOpen} className="p-2 relative text-[#0A3A2A] hover:bg-secondary/50 rounded-full transition-colors">
+            <button onClick={onCartOpen} className={`p-2 relative hover:bg-secondary/50 rounded-full transition-colors ${scrolled ? "text-[#0A3A2A]" : "text-white"}`}>
               <ShoppingBag size={20} />
               {cartCount > 0 && (
                 <motion.span
@@ -130,7 +130,7 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
                 </motion.span>
               )}
             </button>
-            <button onClick={() => setMobileOpen(true)} className="sm:hidden p-2 text-[#0A3A2A]">
+            <button onClick={() => setMobileOpen(true)} className={`sm:hidden p-2 ${scrolled ? "text-[#0A3A2A]" : "text-white"}`}>
               <Menu size={22} />
             </button>
           </div>

@@ -4,7 +4,7 @@ import { ArrowRight, Tag, Sparkles } from "lucide-react";
 
 export default function ComboOffer() {
   return (
-    <section className="w-full py-12 md:py-20 bg-gray-50/50">
+    <section className="editorial-combo-section w-full py-12 md:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row bg-white rounded-3xl overflow-hidden shadow-[0_8px_40px_rgb(0,0,0,0.1)] border border-gray-100">
 
